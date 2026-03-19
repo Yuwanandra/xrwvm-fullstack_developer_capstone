@@ -105,7 +105,17 @@ def get_dealer_reviews(request, dealer_id):
         for review_detail in reviews:
             response = analyze_review_sentiments(review_detail['review'])
             print(response)
-            review_detail['sentiment'] = response['sentiment']
+            # (Other code above this...)
+        for review_detail in reviews:
+            response = analyze_review_sentiments(review_detail['review'])
+            print(response)
+            
+            # --- MAKE SURE THE SPACING LOOKS EXACTLY LIKE THIS ---
+            if response is not None and 'sentiment' in response:
+                review_detail['sentiment'] = response['sentiment']
+            else:
+                review_detail['sentiment'] = "neutral"
+            # -----------------------------------------------------
         return JsonResponse({"status":200,"reviews":reviews})
     else:
         return JsonResponse({"status":400,"message":"Bad Request"})

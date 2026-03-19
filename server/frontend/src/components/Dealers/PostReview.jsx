@@ -62,27 +62,36 @@ const PostReview = () => {
   }
 
   }
-  const get_dealer = async ()=>{
-    const res = await fetch(dealer_url, {
-      method: "GET"
-    });
-    const retobj = await res.json();
-    
-    if(retobj.status === 200) {
-      let dealerobjs = Array.from(retobj.dealer)
-      if(dealerobjs.length > 0)
-        setDealer(dealerobjs[0])
+const get_dealer = async ()=>{
+    try {
+      const res = await fetch(dealer_url, { method: "GET" });
+      const retobj = await res.json();
+      
+      if(retobj.status === 200 && retobj.dealer) {
+        let dealerobjs = Array.from(retobj.dealer);
+        if(dealerobjs.length > 0) {
+          setDealer(dealerobjs[0]);
+        }
+      }
+    } catch (error) {
+      console.log("Error fetching dealer:", error);
     }
   }
 
   const get_cars = async ()=>{
-    const res = await fetch(carmodels_url, {
-      method: "GET"
-    });
-    const retobj = await res.json();
-    
-    let carmodelsarr = Array.from(retobj.CarModels)
-    setCarmodels(carmodelsarr)
+    try {
+      const res = await fetch(carmodels_url, { method: "GET" });
+      const retobj = await res.json();
+      
+      if (retobj.CarModels) {
+        let carmodelsarr = Array.from(retobj.CarModels);
+        setCarmodels(carmodelsarr);
+      } else {
+        console.log("No CarModels found in response");
+      }
+    } catch (error) {
+      console.log("Error fetching cars:", error);
+    }
   }
   useEffect(() => {
     get_dealer();

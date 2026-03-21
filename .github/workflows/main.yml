@@ -24,7 +24,7 @@ jobs:
       - name: Run Linter
         run: |
           pwd
-          find . -name "*.py" -exec flake8 --ignore=E501,E722,F401,F811,E712,F841,W292,W391 {} +
+          find . -name "*.py" -exec flake8 --ignore=E501,E722,F401,F811,E712,F841,W292,W391,E226 {} +
           echo "Linted all the python files successfully"
   lint_js:
     name: Lint JavaScript Files

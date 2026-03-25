@@ -32,7 +32,8 @@ ALLOWED_HOSTS = [
     'localhost', '*']
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
-    'http://127.0.0.1:8000'
+    'http://127.0.0.1:8000',
+    'https://*.proxy.cognitiveclass.ai' # This covers all IBM lab proxy URLs
 ]
 
 REST_FRAMEWORK = {
